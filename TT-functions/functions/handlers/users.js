@@ -77,11 +77,6 @@ exports.login = (req, res) => {
 
   if (!valid) return res.status(400).json(errors);
 
-  if (isEmpty(user.email)) errors.email = "Must not be empty";
-  if (isEmpty(user.password)) errors.password = "Must not be empty";
-
-  if (Object.keys(errors) > 0) return res.status(400).json(errors);
-
   firebase
     .auth()
     .signInWithEmailAndPassword(user.email, user.password)
@@ -112,6 +107,33 @@ exports.addUserDetails = (req, res) => {
     .update(userDetails)
     .then(() => {
       return res.json({ message: "Details added successfully" });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+// Get own user details
+exports.getAuthenticatedUser = (req, res) => {
+  let userData = {};
+  db.doc(`/users/${req.user.handle}`)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        userData.credentials = doc.data();
+        return db
+          .collection("likes")
+          .where("userHandle", "==", req.user.handle)
+          .get();
+      }
+    })
+    .then((data) => {
+      userData.likes = [];
+      data.forEach((doc) => {
+        userData.likes.push(doc.data());
+      });
+      return res.json(userData);
     })
     .catch((err) => {
       console.error(err);
