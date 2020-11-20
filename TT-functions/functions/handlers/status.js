@@ -58,6 +58,7 @@ exports.getStatus = (req, res) => {
       statusData.statusId = doc.id;
       return db
         .collection("comments")
+        .orderBy("createAt", "desc")
         .where("statusId", "==", req.params.statusId)
         .get();
     })
