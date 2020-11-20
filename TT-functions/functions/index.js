@@ -6,7 +6,7 @@ const app = require("express")();
 
 const FBAuth = require("./utility/fbAuth");
 
-const { getAllStatus, postOneStatus } = require("./handlers/status");
+const { getAllStatus, postOneStatus, getStatus } = require("./handlers/status");
 const {
   signup,
   login,

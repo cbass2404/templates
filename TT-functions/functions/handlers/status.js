@@ -45,3 +45,31 @@ exports.postOneStatus = (req, res) => {
       console.error(err);
     });
 };
+
+exports.getStatus = (req, res) => {
+  let statusData = {};
+  db.doc(`/status/${req.params.statusId}`)
+    .get()
+    .then((doc) => {
+      if (!doc.exists) {
+        return res.status(404).json({ error: "Status not found" });
+      }
+      statusData = doc.data();
+      statusData.statusId = doc.id;
+      return db
+        .collection("comments")
+        .where("statusId", "==", req.params.statusId)
+        .get();
+    })
+    .then((data) => {
+      statusData.comments = [];
+      data.forEach((doc) => {
+        statusData.comments.push(doc.data());
+      });
+      return res.json(statusData);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: err.code });
+    });
+};
