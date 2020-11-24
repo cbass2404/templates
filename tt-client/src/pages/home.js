@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-
 import Grid from "@material-ui/core/Grid";
+
+import Status from "../components/status";
 
 class Home extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Home extends Component {
     };
   }
 
-  componentDidMount() {
+  getStatus() {
     axios
       .get("/status")
       .then((res) => {
@@ -24,14 +25,24 @@ class Home extends Component {
       });
   }
 
+  componentDidMount() {
+    this.getStatus();
+  }
+
+  componentWillUnmount() {
+    this.getStatus();
+  }
+
   render() {
     let recentStatusMarkup = this.state.status ? (
-      this.status.status.map((oneStatus) => <p>{oneStatus.body}</p>)
+      this.state.status.map((oneStatus) => (
+        <Status key={oneStatus.statusId} oneStatus={oneStatus} />
+      ))
     ) : (
       <p>Loading...</p>
     );
     return (
-      <Grid container spacing={16}>
+      <Grid container spacing={10}>
         <Grid item sm={8} xs={12}>
           {recentStatusMarkup}
         </Grid>
