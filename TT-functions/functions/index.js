@@ -133,3 +133,36 @@ exports.onUserImageChange = functions
         });
     }
   });
+
+exports.onStatusDelete = functions
+  .region("us-central1")
+  .firestore.document("/status/{statusId}")
+  .onDelete((snapshot, context) => {
+    const statusId = context.params.statusId;
+    const batch = db.batch();
+    return db
+      .collection("comments")
+      .where("statusId", "==", statusId)
+      .get()
+      .then((data) => {
+        data.forEach((doc) => {
+          batch.delete(db.doc(`/comments/${doc.id}`));
+        });
+        return db.collection("likes").where("statusId", "==", statusId);
+      })
+      .then((data) => {
+        data.forEach((doc) => {
+          batch.delete(db.doc(`/likes/${doc.id}`));
+        });
+        return db.collection("notifications").where("statusId", "==", statusId);
+      })
+      .then((data) => {
+        data.forEach((doc) => {
+          batch.delete(db.doc(`/notifications/${doc.id}`));
+        });
+        return batch.commit();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
