@@ -131,7 +131,7 @@ exports.onUserImageChange = functions
           });
           return batch.commit();
         });
-    }
+    } else return true;
   });
 
 exports.onStatusDelete = functions
@@ -148,13 +148,16 @@ exports.onStatusDelete = functions
         data.forEach((doc) => {
           batch.delete(db.doc(`/comments/${doc.id}`));
         });
-        return db.collection("likes").where("statusId", "==", statusId);
+        return db.collection("likes").where("statusId", "==", statusId).get();
       })
       .then((data) => {
         data.forEach((doc) => {
           batch.delete(db.doc(`/likes/${doc.id}`));
         });
-        return db.collection("notifications").where("statusId", "==", statusId);
+        return db
+          .collection("notifications")
+          .where("statusId", "==", statusId)
+          .get();
       })
       .then((data) => {
         data.forEach((doc) => {
