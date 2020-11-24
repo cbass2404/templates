@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import Grid from "@material-ui/core/Grid";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -7,9 +9,14 @@ class Home extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Home page</h1>
-      </div>
+      <Grid container spacing={16}>
+        <Grid item sm={8} xs={12}>
+          <p>Content...</p>
+        </Grid>
+        <Grid item sm={4} xs={12}>
+          <p>Profile...</p>
+        </Grid>
+      </Grid>
     );
   }
 }
