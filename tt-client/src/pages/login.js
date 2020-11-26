@@ -3,6 +3,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import themeFile from "../utility/theme";
 
 import appIcon from "../images/favicon.ico";
 
@@ -13,9 +14,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const styles = (theme) => ({
-  ...theme,
-});
+const styles = themeFile;
 
 class Login extends Component {
   constructor(props) {
@@ -46,7 +45,7 @@ class Login extends Component {
     axios
       .post("/login", userData)
       .then((res) => {
-        console.log(res.data);
+        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
         this.setState({
           loading: false,
         });
