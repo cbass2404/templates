@@ -28,7 +28,7 @@ export const loginUser = (userData, history) => (dispatch) => {
 export const signupUser = (newUserData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post("/signup", userData)
+    .post("/signup", newUserData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch(getUserData());
@@ -59,7 +59,7 @@ export const getUserData = () => (dispatch) => {
 };
 
 const setAuthorizationHeader = (token) => {
-  const FBIdToken = `Bearer ${res.data.token}`;
+  const FBIdToken = `Bearer ${token}`;
   localStorage.setItem("FBIdToken", FBIdToken);
   axios.defaults.headers.common["Authorization"] = FBIdToken;
 };

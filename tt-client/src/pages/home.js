@@ -12,7 +12,7 @@ class Home extends Component {
     };
   }
 
-  getStatus() {
+  getStatus = () => {
     axios
       .get("/status")
       .then((res) => {
@@ -23,15 +23,13 @@ class Home extends Component {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   componentDidMount() {
     this.getStatus();
   }
 
-  componentWillUnmount() {
-    this.getStatus();
-  }
+  componentWillUnmount() {}
 
   render() {
     let recentStatusMarkup = this.state.status ? (
