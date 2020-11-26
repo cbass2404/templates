@@ -209,7 +209,7 @@ exports.uploadImage = (req, res) => {
 
   let imageToBeUploaded = {};
   let imageFileName;
-  let generatedToken = uuid();
+  let generatedToken = uid();
 
   busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
     console.log(fieldname, file, filename, encoding, mimetype);

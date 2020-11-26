@@ -4,6 +4,9 @@ const functions = require("firebase-functions");
 const app = require("express")();
 const FBAuth = require("./utility/fbAuth");
 
+const cors = require("cors");
+app.use(cors());
+
 const { db } = require("./utility/admin");
 
 const {
@@ -27,7 +30,7 @@ const {
 
 // Status Routes
 app.get("/status", getAllStatus);
-app.post("/post-status", FBAuth, postOneStatus);
+app.post("/status", FBAuth, postOneStatus);
 app.get("/status/:statusId", getStatus);
 app.post("/status/:statusId/comment", FBAuth, commentOnStatus);
 app.delete("/status/:statusId", FBAuth, deleteStatus);
@@ -37,13 +40,13 @@ app.get("/status/:statusId/unlike", FBAuth, unlikeStatus);
 // User Routes
 app.post("/signup", signup);
 app.post("/login", login);
-app.post("/users/image", FBAuth, uploadImage);
+app.post("/user/image", FBAuth, uploadImage);
 app.post("/user", FBAuth, addUserDetails);
 app.get("/user", FBAuth, getAuthenticatedUser);
 app.get("/user/:handle", getUserDetails);
 app.post("/notifications", FBAuth, markNotificationsRead);
 
-exports.api = functions.https.onRequest(app);
+exports.api = functions.region("us-central1").https.onRequest(app);
 
 exports.createNotificationOnLike = functions
   .region("us-central1")
