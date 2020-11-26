@@ -1,6 +1,7 @@
 const { db, admin } = require("../utility/admin");
 
 const config = require("../utility/config");
+const { uuid } = require("uuidv4");
 
 const firebase = require("firebase");
 firebase.initializeApp(config);
@@ -209,7 +210,7 @@ exports.uploadImage = (req, res) => {
 
   let imageToBeUploaded = {};
   let imageFileName;
-  let generatedToken = uid();
+  let generatedToken = uuid();
 
   busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
     console.log(fieldname, file, filename, encoding, mimetype);
