@@ -3,6 +3,7 @@ import {
   SET_ERRORS,
   CLEAR_ERRORS,
   LOADING_UI,
+  SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
 } from "../types";
 
@@ -27,5 +28,7 @@ export default function (state = initialState, action) {
         authenticated: true,
         ...action.payload,
       };
+    default:
+      return state;
   }
 }
