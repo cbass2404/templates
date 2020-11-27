@@ -21,8 +21,12 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import { connect } from "react-redux";
 import { likeStatus, unlikeStatus } from "../redux/actions/dataActions";
 
+// component
+import DeleteStatus from "./deleteStatus";
+
 const styles = {
   card: {
+    position: "relative",
     display: "flex",
     marginBottom: 20,
   },
@@ -68,7 +72,10 @@ class Status extends Component {
         likeCount,
         commentCount,
       },
-      user: { authenticated },
+      user: {
+        authenticated,
+        credentials: { handle },
+      },
     } = this.props;
 
     const likeButton = !authenticated ? (
@@ -87,6 +94,11 @@ class Status extends Component {
       </MyButton>
     );
 
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <DeleteStatus statusId={statusId} />
+      ) : null;
+
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -103,6 +115,7 @@ class Status extends Component {
           >
             {userHandle}
           </Typography>
+          {deleteButton}
           <Typography variant="body2" color="textSecondary">
             {dayjs(createdAt).fromNow()}
           </Typography>

@@ -1,4 +1,10 @@
-import { SET_STATUS, LIKE_STATUS, UNLIKE_STATUS, LOADING_DATA } from "../types";
+import {
+  SET_STATUS,
+  LIKE_STATUS,
+  UNLIKE_STATUS,
+  LOADING_DATA,
+  DELETE_STATUS,
+} from "../types";
 
 const initialState = {
   status: [],
@@ -28,6 +34,14 @@ export default function (state = initialState, action) {
       if (state.status.statusId === action.payload.statusId) {
         state.status = action.payload;
       }
+      return {
+        ...state,
+      };
+    case DELETE_STATUS:
+      let deleteIndex = state.status.findIndex(
+        (status) => status.statusId === action.payload
+      );
+      state.status.splice(deleteIndex, 1);
       return {
         ...state,
       };

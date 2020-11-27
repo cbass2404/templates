@@ -1,4 +1,10 @@
-import { SET_STATUS, LOADING_DATA, LIKE_STATUS, UNLIKE_STATUS } from "../types";
+import {
+  SET_STATUS,
+  LOADING_DATA,
+  LIKE_STATUS,
+  UNLIKE_STATUS,
+  DELETE_STATUS,
+} from "../types";
 import axios from "axios";
 
 // get all status
@@ -17,6 +23,7 @@ export const getStatus = () => (dispatch) => {
         type: SET_STATUS,
         payload: [],
       });
+      console.log("get all status, dataActions.js", err);
     });
 };
 
@@ -31,7 +38,7 @@ export const likeStatus = (statusId) => (dispatch) => {
         payload: res.data,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("like status, dataActions.js", err));
 };
 
 // unlike status
@@ -44,5 +51,15 @@ export const unlikeStatus = (statusId) => (dispatch) => {
         payload: res.data,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("unlike status, dataActions.js", err));
+};
+
+// delete status
+export const deleteStatus = (statusId) => (dispatch) => {
+  axios
+    .delete(`/status/${statusId}`)
+    .then(() => {
+      dispatch({ type: DELETE_STATUS, payload: statusId });
+    })
+    .catch((err) => console.log("Delete Status, dataActions.js", err));
 };
