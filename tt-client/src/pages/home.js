@@ -1,42 +1,25 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types";
 
+// redux
+import { connect } from "react-redux";
+import { getStatus } from "../redux/actions/dataActions";
+
+// components
 import Status from "../components/status";
 import Profile from "../components/profile";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      status: null,
-    };
-  }
-
-  getStatus = () => {
-    axios
-      .get("/status")
-      .then((res) => {
-        this.setState({
-          status: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   componentDidMount() {
-    this.getStatus();
+    this.props.getStatus();
   }
-
-  componentWillUnmount() {}
 
   render() {
-    let recentStatusMarkup = this.state.status ? (
-      this.state.status.map((oneStatus) => (
-        <Status key={oneStatus.statusId} oneStatus={oneStatus} />
-      ))
+    const { status, loading } = this.props.data;
+    let recentStatusMarkup = status ? (
+      status.map((status) => <Status key={status.statusId} status={status} />)
     ) : (
       <p>Loading...</p>
     );
@@ -53,4 +36,13 @@ class Home extends Component {
   }
 }
 
-export default Home;
+Home.propTypes = {
+  getStatus: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  data: state.data,
+});
+
+export default connect(mapStateToProps, { getStatus })(Home);

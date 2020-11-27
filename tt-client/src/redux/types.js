@@ -7,6 +7,11 @@ export const LOADING_USER = "LOADING_USER";
 // UI reducer types
 export const SET_ERRORS = "SET_ERRORS";
 export const LOADING_UI = "LOADING_UI";
+export const LOADING_DATA = "LOADING_DATA";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 // Data reducer types
+export const SET_STATUS = "SET_STATUS";
+export const SET_A_STATUS = "SET_A_STATUS";
+export const LIKE_STATUS = "LIKE_STATUS";
+export const UNLIKE_STATUS = "UNLIKE_STATUS";
