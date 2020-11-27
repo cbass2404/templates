@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import myButton from "../utility/myButton";
+import MyButton from "../utility/myButton";
 
 // mui
 import AppBar from "@material-ui/core/AppBar";
@@ -28,17 +28,17 @@ class Navbar extends Component {
         <Toolbar className="nav-container">
           {authenticated ? (
             <Fragment>
-              <myButton tip="Post a status">
+              <MyButton tip="Post a status">
                 <AddIcon color="primary" />
-              </myButton>
-              <myButton tip="Home">
+              </MyButton>
+              <MyButton tip="Home">
                 <Link to="/">
                   <HomeIcon color="primary" />
                 </Link>
-              </myButton>
-              <myButton tip="Notifications">
+              </MyButton>
+              <MyButton tip="Notifications">
                 <Notifications color="primary" />
-              </myButton>
+              </MyButton>
             </Fragment>
           ) : (
             <Fragment>
@@ -59,10 +59,9 @@ class Navbar extends Component {
   }
 }
 
-Navbar.propTypes -
-  {
-    authenticated: PropTypes.bool.isRequired,
-  };
+Navbar.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated,

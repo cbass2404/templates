@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import EditDetails from "../components/editDetails";
+import MyButton from "../utility/myButton";
 
 // redux
 import { connect } from "react-redux";
@@ -122,6 +123,7 @@ class Profile extends Component {
                   <EditIcon color="primary" />
                 </IconButton>
               </Tooltip>
+              <MyButton
             </div>
             <hr />
             <div className="profile-details">
