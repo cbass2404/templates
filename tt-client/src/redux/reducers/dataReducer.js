@@ -4,6 +4,7 @@ import {
   UNLIKE_STATUS,
   LOADING_DATA,
   DELETE_STATUS,
+  POST_STATUS,
 } from "../types";
 
 const initialState = {
@@ -44,6 +45,11 @@ export default function (state = initialState, action) {
       state.status.splice(deleteIndex, 1);
       return {
         ...state,
+      };
+    case POST_STATUS:
+      return {
+        ...state,
+        status: [action.payload, ...state.status],
       };
     default:
       return state;

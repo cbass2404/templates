@@ -4,6 +4,10 @@ import {
   LIKE_STATUS,
   UNLIKE_STATUS,
   DELETE_STATUS,
+  SET_ERRORS,
+  POST_STATUS,
+  CLEAR_ERRORS,
+  LOADING_UI,
 } from "../types";
 import axios from "axios";
 
@@ -24,6 +28,26 @@ export const getStatus = () => (dispatch) => {
         payload: [],
       });
       console.log("get all status, dataActions.js", err);
+    });
+};
+
+// post new status
+export const postStatus = (newStatus) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post("/status", newStatus)
+    .then((res) => {
+      dispatch({
+        type: POST_STATUS,
+        payload: res.data,
+      });
+      dispatch({ type: CLEAR_ERRORS });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
     });
 };
 
