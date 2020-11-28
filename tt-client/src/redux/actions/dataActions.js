@@ -87,3 +87,8 @@ export const deleteStatus = (statusId) => (dispatch) => {
     })
     .catch((err) => console.log("Delete Status, dataActions.js", err));
 };
+
+// clear errors
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
+};

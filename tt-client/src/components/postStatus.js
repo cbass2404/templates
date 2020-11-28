@@ -16,12 +16,14 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Redux stuff
 import { connect } from "react-redux";
-import { postStatus } from "../redux/actions/dataActions";
+import { postStatus, clearErrors } from "../redux/actions/dataActions";
 
 const styles = {
   ...theme,
   submitButton: {
     position: "relative",
+    float: "right",
+    marginTop: 10,
   },
   progressSpinner: {
     position: "absolute",
@@ -40,7 +42,7 @@ class PostStatus extends Component {
     errors: {},
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({
         errors: nextProps.UI.errors,
@@ -56,6 +58,7 @@ class PostStatus extends Component {
   };
 
   handleClose = () => {
+    this.props.clearErrors();
     this.setState({ open: false, errors: {} });
   };
 
@@ -135,6 +138,7 @@ class PostStatus extends Component {
 
 PostStatus.propTypes = {
   postStatus: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
 };
 
