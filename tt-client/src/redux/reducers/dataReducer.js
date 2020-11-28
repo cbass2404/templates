@@ -1,5 +1,6 @@
 import {
   SET_STATUS,
+  SET_A_STATUS,
   LIKE_STATUS,
   UNLIKE_STATUS,
   LOADING_DATA,
@@ -25,6 +26,11 @@ export default function (state = initialState, action) {
         ...state,
         status: action.payload,
         loading: false,
+      };
+    case SET_A_STATUS:
+      return {
+        ...state,
+        aStatus: action.payload,
       };
     case LIKE_STATUS:
     case UNLIKE_STATUS:

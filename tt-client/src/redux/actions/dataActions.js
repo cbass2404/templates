@@ -8,6 +8,8 @@ import {
   POST_STATUS,
   CLEAR_ERRORS,
   LOADING_UI,
+  SET_A_STATUS,
+  STOP_LOADING_UI,
 } from "../types";
 import axios from "axios";
 
@@ -29,6 +31,18 @@ export const getStatus = () => (dispatch) => {
       });
       console.log("get all status, dataActions.js", err);
     });
+};
+
+// get a status
+export const getAStatus = (statusId) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .get(`/status/${statusId}`)
+    .then((res) => {
+      dispatch({ type: SET_A_STATUS, payload: res.data });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch((err) => console.log("getAStatus, dataActions.js", err));
 };
 
 // post new status

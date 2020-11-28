@@ -17,3 +17,4 @@ export const LIKE_STATUS = "LIKE_STATUS";
 export const UNLIKE_STATUS = "UNLIKE_STATUS";
 export const DELETE_STATUS = "DELETE_STATUS";
 export const POST_STATUS = "POST_STATUS";
+export const STOP_LOADING_UI = "STOP_LOADING_UI";

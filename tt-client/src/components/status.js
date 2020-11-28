@@ -23,6 +23,7 @@ import { likeStatus, unlikeStatus } from "../redux/actions/dataActions";
 
 // component
 import DeleteStatus from "./deleteStatus";
+import StatusDialog from "./statusDialog.js";
 
 const styles = {
   card: {
@@ -126,6 +127,7 @@ class Status extends Component {
             <ChatIcon color="primary" />
           </MyButton>
           <span>{commentCount} comments</span>
+          <StatusDialog statusId={statusId} userHandle={userHandle} />
         </CardContent>
       </Card>
     );
