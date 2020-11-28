@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../utility/myButton";
+import MyButton from "../../utility/myButton";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import LikeButton from "./likeButton";
 
 // mui
-import theme from "../utility/theme";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -17,10 +17,14 @@ import Typography from "@material-ui/core/Typography";
 // icons
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
+import ChatIcon from "@material-ui/icons/Chat";
 
 // redux
 import { connect } from "react-redux";
-import { getAStatus } from "../redux/actions/dataActions";
+import { getAStatus } from "../../redux/actions/dataActions";
+
+// components
+import theme from "../../utility/theme";
 
 const styles = {
   ...theme,
@@ -105,6 +109,12 @@ class StatusDialog extends Component {
           </Typography>
           <hr className={classes.invisibleSeparator} />
           <Typography variant="body1">{body}</Typography>
+          <LikeButton statusId={statusId} />
+          <span>{likeCount} Likes</span>
+          <MyButton tip="comments">
+            <ChatIcon color="primary" />
+          </MyButton>
+          <span>{commentCount} comments</span>
         </Grid>
       </Grid>
     );

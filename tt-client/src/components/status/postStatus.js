@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../utility/myButton";
+import MyButton from "../../utility/myButton";
 
 // MUI Stuff
-import theme from "../utility/theme";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -16,7 +15,10 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Redux stuff
 import { connect } from "react-redux";
-import { postStatus, clearErrors } from "../redux/actions/dataActions";
+import { postStatus, clearErrors } from "../../redux/actions/dataActions";
+
+// Components
+import theme from "../../utility/theme";
 
 const styles = {
   ...theme,

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import MyButton from "../utility/myButton";
+import MyButton from "../../utility/myButton";
 
 // mui
 import AppBar from "@material-ui/core/AppBar";
@@ -16,7 +16,7 @@ import Notifications from "@material-ui/icons/Notifications";
 import { connect } from "react-redux";
 
 // components
-import PostStatus from "./postStatus";
+import PostStatus from "../status/postStatus";
 
 class Navbar extends Component {
   constructor(props) {

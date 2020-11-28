@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 import { getStatus } from "../redux/actions/dataActions";
 
 // components
-import Status from "../components/status";
-import Profile from "../components/profile";
+import Status from "../components/status/status";
+import Profile from "../components/profile/profile";
 
 class Home extends Component {
   componentDidMount() {

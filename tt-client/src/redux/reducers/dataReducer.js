@@ -38,6 +38,9 @@ export default function (state = initialState, action) {
         (status) => status.statusId === action.payload.statusId
       );
       state.status[index] = action.payload;
+      if (state.aStatus.statusId === action.payload.statusId) {
+        state.aStatus = action.payload;
+      }
       if (state.status.statusId === action.payload.statusId) {
         state.status = action.payload;
       }
