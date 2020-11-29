@@ -25,6 +25,9 @@ import Signup from "./pages/signup";
 
 const theme = createMuiTheme(themeFile);
 
+axios.defaults.baseURL =
+  "https://us-central1-tentime-99a3b.cloudfunctions.net/api";
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
