@@ -16,10 +16,15 @@ import StaticProfile from "../components/profile/staticProfile";
 class User extends Component {
   state = {
     profile: null,
+    statusIdParam: null,
   };
 
   componentDidMount() {
     const handle = this.props.match.params.handle;
+    const statusId = this.props.match.params.statusId;
+
+    if (statusId) this.setState({ statusIdParam: statusId });
+
     this.props.getUserData(handle);
     axios
       .get(`/user/${handle}`)
@@ -30,13 +35,20 @@ class User extends Component {
   }
   render() {
     const { status, loading } = this.props.data;
+    const { statusIdParam } = this.state;
 
     const statusMarkup = loading ? (
       <p>Loading data...</p>
     ) : status === null ? (
       <p>No status updates from this user</p>
-    ) : (
+    ) : !statusIdParam ? (
       status.map((status) => <Status key={status.statusId} status={status} />)
+    ) : (
+      status.map((status) => {
+        if (status.statusId !== statusIdParam)
+          return <Status key={status.statusId} status={status} />;
+        else return <Status key={status.statusId} status={status} openDialog />;
+      })
     );
 
     return (

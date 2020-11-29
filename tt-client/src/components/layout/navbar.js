@@ -10,13 +10,13 @@ import Button from "@material-ui/core/Button";
 
 // icons
 import HomeIcon from "@material-ui/icons/Home";
-import Notifications from "@material-ui/icons/Notifications";
 
 // redux
 import { connect } from "react-redux";
 
 // components
 import PostStatus from "../status/postStatus";
+import Notifications from "./notifications";
 
 class Navbar extends Component {
   constructor(props) {

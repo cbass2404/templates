@@ -90,7 +90,11 @@ class Status extends Component {
             <ChatIcon color="primary" />
           </MyButton>
           <span>{commentCount} comments</span>
-          <StatusDialog statusId={statusId} userHandle={userHandle} />
+          <StatusDialog
+            statusId={statusId}
+            userHandle={userHandle}
+            openDialog={this.props.openDialog}
+          />
         </CardContent>
       </Card>
     );
@@ -101,6 +105,7 @@ Status.propTypes = {
   user: PropTypes.object.isRequired,
   status: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  openDialog: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
