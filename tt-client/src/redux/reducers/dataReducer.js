@@ -6,6 +6,7 @@ import {
   LOADING_DATA,
   DELETE_STATUS,
   POST_STATUS,
+  SUBMIT_COMMENT,
 } from "../types";
 
 const initialState = {
@@ -59,6 +60,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         status: [action.payload, ...state.status],
+      };
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        aStatus: {
+          ...state.aStatus,
+          comments: [action.payload, ...state.aStatus.comments],
+        },
       };
     default:
       return state;

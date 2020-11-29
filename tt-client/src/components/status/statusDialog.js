@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../../utility/myButton";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import LikeButton from "./likeButton";
 
 // mui
 import Dialog from "@material-ui/core/Dialog";
@@ -21,17 +19,17 @@ import ChatIcon from "@material-ui/icons/Chat";
 
 // redux
 import { connect } from "react-redux";
-import { getAStatus } from "../../redux/actions/dataActions";
+import { getAStatus, clearErrors } from "../../redux/actions/dataActions";
 
 // components
+import MyButton from "../../utility/myButton";
 import theme from "../../utility/theme";
+import LikeButton from "./likeButton";
+import Comments from "./comments";
+import CommentForm from "./commentForm";
 
 const styles = {
   ...theme,
-  invisibleSeparator: {
-    border: "none",
-    margin: 4,
-  },
   profileImage: {
     maxWidth: 200,
     height: 200,
@@ -68,6 +66,7 @@ class StatusDialog extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.props.clearErrors();
   };
 
   render() {
@@ -81,6 +80,7 @@ class StatusDialog extends Component {
         commentCount,
         userImage,
         userHandle,
+        comments,
       },
       UI: { loading },
     } = this.props;
@@ -90,7 +90,7 @@ class StatusDialog extends Component {
         <CircularProgress size={200} thickness={2} />
       </div>
     ) : (
-      <Grid container spacing={10}>
+      <Grid container spacing={16}>
         <Grid item sm={5}>
           <img src={userImage} alt="Profile" className={classes.profileImage} />
         </Grid>
@@ -116,6 +116,9 @@ class StatusDialog extends Component {
           </MyButton>
           <span>{commentCount} comments</span>
         </Grid>
+        <hr className={classes.visibleSeparator} />
+        <CommentForm statusId={statusId} />
+        <Comments comments={comments} />
       </Grid>
     );
     return (
@@ -151,6 +154,7 @@ class StatusDialog extends Component {
 
 StatusDialog.propTypes = {
   getStatus: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   statusId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
   aStatus: PropTypes.object.isRequired,
@@ -164,6 +168,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = {
   getAStatus,
+  clearErrors,
 };
 
 export default connect(

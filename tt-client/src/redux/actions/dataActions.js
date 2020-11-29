@@ -10,6 +10,7 @@ import {
   LOADING_UI,
   SET_A_STATUS,
   STOP_LOADING_UI,
+  SUBMIT_COMMENT,
 } from "../types";
 import axios from "axios";
 
@@ -39,7 +40,10 @@ export const getAStatus = (statusId) => (dispatch) => {
   axios
     .get(`/status/${statusId}`)
     .then((res) => {
-      dispatch({ type: SET_A_STATUS, payload: res.data });
+      dispatch({
+        type: SET_A_STATUS,
+        payload: res.data,
+      });
       dispatch({ type: STOP_LOADING_UI });
     })
     .catch((err) => console.log("getAStatus, dataActions.js", err));
@@ -90,6 +94,25 @@ export const unlikeStatus = (statusId) => (dispatch) => {
       });
     })
     .catch((err) => console.log("unlike status, dataActions.js", err));
+};
+
+// submit new coment
+export const submitComment = (statusId, commentData) => (dispatch) => {
+  axios
+    .post(`/status/${statusId}/comment`, commentData)
+    .then((res) => {
+      dispatch({
+        type: SUBMIT_COMMENT,
+        payload: res.data,
+      });
+      dispatch(clearErrors());
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
 };
 
 // delete status
