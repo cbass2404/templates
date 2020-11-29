@@ -148,6 +148,12 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-export default connect(mapStateToProps, { postStatus })(
-  withStyles(styles)(PostStatus)
-);
+const mapActionToProps = {
+  postStatus,
+  clearErrors,
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(withStyles(styles)(PostStatus));

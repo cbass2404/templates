@@ -12,6 +12,8 @@ import { getUserData } from "../redux/actions/dataActions";
 // components
 import Status from "../components/status/status";
 import StaticProfile from "../components/profile/staticProfile";
+import StatusSkeleton from "../utility/statusSkeleton";
+import ProfileSkeleton from "../utility/profileSkeleton";
 
 class User extends Component {
   state = {
@@ -38,7 +40,7 @@ class User extends Component {
     const { statusIdParam } = this.state;
 
     const statusMarkup = loading ? (
-      <p>Loading data...</p>
+      <StatusSkeleton />
     ) : status === null ? (
       <p>No status updates from this user</p>
     ) : !statusIdParam ? (
@@ -58,7 +60,7 @@ class User extends Component {
         </Grid>
         <Grid item sm={4} xs={12}>
           {this.state.profile === null ? (
-            <p>Loading profile...</p>
+            <ProfileSkeleton />
           ) : (
             <StaticProfile profile={this.state.profile} />
           )}

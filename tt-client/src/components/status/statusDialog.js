@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 // mui
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -171,7 +170,7 @@ class StatusDialog extends Component {
 }
 
 StatusDialog.propTypes = {
-  getStatus: PropTypes.func.isRequired,
+  getAStatus: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
   statusId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
