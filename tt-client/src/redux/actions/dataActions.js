@@ -125,6 +125,22 @@ export const deleteStatus = (statusId) => (dispatch) => {
     .catch((err) => console.log("Delete Status, dataActions.js", err));
 };
 
+// get user data
+export const getUserData = (userHandle) => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(`/user/${userHandle}`)
+    .then((res) => {
+      dispatch({
+        type: SET_STATUS,
+        payload: res.data.status,
+      });
+    })
+    .catch(() => {
+      dispatch({ type: SET_STATUS, payload: null });
+    });
+};
+
 // clear errors
 export const clearErrors = () => (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
