@@ -19,10 +19,6 @@ import PostStatus from "../status/postStatus";
 import Notifications from "./notifications";
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   render() {
     const { authenticated } = this.props;
     return (

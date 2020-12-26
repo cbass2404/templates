@@ -10,8 +10,8 @@ import axios from "axios";
 // Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser, getUserData } from "./redux/actions/userActions";
+import { SET_AUTHENTICATED } from "./redux/types";
 
 // Components
 import Navbar from "./components/layout/navbar";
